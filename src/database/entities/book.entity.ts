@@ -15,6 +15,9 @@ class Book {
     @Column({type: 'varchar'})
     public author: string;
 
+    @Column({type: 'varchar'})
+    public image: string;
+
     @ManyToOne(() => Category, (category: any) => category.books, { onDelete: 'CASCADE' })
     public category: Category;
 }  
