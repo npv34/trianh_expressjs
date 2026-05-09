@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn, ManyToMany, JoinTable } from "typeorm";
+import Role from "./role.entity.ts";
 
 @Entity("users")
 class User {
@@ -16,6 +17,12 @@ class User {
 
     @Column({type: 'varchar'})
     public address: string;
+
+    @DeleteDateColumn()
+    deletedAt?: Date;
+
+    @ManyToMany(() => Role, (role: any) => role.users, { onDelete: 'CASCADE' })
+    public roles: Role[]
 }
 
 export default User

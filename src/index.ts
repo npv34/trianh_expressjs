@@ -3,13 +3,21 @@ import express, { type Request, type Response } from 'express';
 import webRouter from "./routers/web.router.ts"
 import dotenv from "dotenv";
 import AppDataSource from "./database/datasource.ts";
+import bodyParser from "body-parser";
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 // config view engine
 app.set("view engine", "ejs")
-app.set("views", "./views")
+app.set("views", "src/views")
+
+// config body-parser
+// Parse application/json
+app.use(bodyParser.json());
+
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", webRouter)
 
